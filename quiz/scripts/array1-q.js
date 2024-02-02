@@ -15,13 +15,19 @@ window.onload = function() {
               list.innerHTML = '';
 
               // loop through the sorted array, and display all the search terms in the list
+              myHistory.push(inp.value);
+              let myHistoryCopy = Array.from(myHistory)
+              myHistoryCopy.sort((a, b)=> a.length - b.length);
+
               for (const itemText of myHistoryCopy) {
-                
+                const listItem = document.createElement('li');
+                listItem.textContent = itemText;
+                list.appendChild(listItem);
               }
 
               // If the array length is 5 or more, remove the oldest search term
               if (myHistory.length >= MAX_HISTORY) {
-                
+                myHistory.shift();
               }
 
               // empty the search input and focus it, ready for the next term to be entered
